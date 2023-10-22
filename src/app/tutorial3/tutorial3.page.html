@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Tutorial 3 Home Page </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-item>
+    Brands
+    <ion-button routerLink="/brands" slot="end"> Go to page </ion-button>
+  </ion-item>
+  <ion-item>
+    Detail
+    <ion-button routerLink="/details" slot="end"> Go to page </ion-button>
+  </ion-item>
+  <ion-item>
+    Settings
+    <ion-button routerLink="/settings" slot="end"> Go to page </ion-button>
+  </ion-item>
+  <ion-item>
+    Info
+    <ion-button slot="end" id="InfoAlert"> Go to page </ion-button>
+    <ion-alert
+      trigger="InfoAlert"
+      header="Information"
+      message="Number of Laptops: {{listLength}} "
+      [buttons]="alertButtons"
+    ></ion-alert>
+  </ion-item>
+</ion-content>

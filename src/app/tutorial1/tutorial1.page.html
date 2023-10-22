@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Register </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Register New User </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-input
+          label="Full Name"
+          placeholder="Enter user's full name here"
+          type="text"
+          labelPlacement="stacked"
+          [(ngModel)]="fullName"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          label="Contact Number"
+          placeholder="Enter user's contact number here"
+          type="number"
+          labelPlacement="stacked"
+          clearInput="true"
+          [(ngModel)]="contactNumber"
+        ></ion-input>
+      </ion-item>
+
+      <div class="ion-margin-vertical ion-text-center">
+        <ion-button (click)="addUser()" id="addUser"
+          >Save User <ion-icon slot="end" name="add-outline"></ion-icon>
+        </ion-button>
+        <ion-alert
+          trigger="addUser"
+          header="Alert"
+          message="Information Saved!"
+          [buttons]="alertButtons"
+        ></ion-alert>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-title>Registered Users </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let x of List">
+        <ion-text>{{ x.fullName }}</ion-text>
+        <ion-button slot="end" color="medium" (click)="editUser()" id="edetUser"
+          >Edit <ion-icon slot="end" name="pencil-outline"></ion-icon
+        ></ion-button>
+        <ion-alert
+          trigger="edetUser"
+          header="Alert"
+          message="Edit user's full name"
+          [buttons]="alertButtons"
+          [inputs]="alertInputs"
+        >
+        </ion-alert>
+        <ion-button slot="end" (click)="deleteUser()"
+          >Delete <ion-icon slot="end" name="close-outline"></ion-icon
+        ></ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-text class="ion-margin-horizontal" slot="start"
+      ><h3>#{{counter}}</h3></ion-text
+    >
+    <ion-button
+      class="ion-margin-horizontal"
+      slot="end"
+      (click)="incrementCounter()"
+    >
+      <ion-icon name="heart"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-footer>

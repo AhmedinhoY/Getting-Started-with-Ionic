@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <img src="{{DataSrv.list[index].Image}}" />
+    </ion-card-header>
+    <ion-card-content>
+      <h1>
+        <span style="color: var(--ion-color-primary)">Brand: </span> {{
+        DataSrv.list[index].Brand }}
+      </h1>
+      <ion-row class="ion-margin ion-justify-content-between" slot="content">
+        <span style="color: var(--ion-color-primary)">CPU: </span
+        >{{DataSrv.list[index].CPU}}
+      </ion-row>
+      <ion-row class="ion-margin ion-justify-content-between" slot="content">
+        <span style="color: var(--ion-color-primary)">GPU: </span
+        >{{DataSrv.list[index].GPU}}
+      </ion-row>
+      <ion-row class="ion-margin ion-justify-content-between" slot="content">
+        <span style="color: var(--ion-color-primary)">RAM: </span
+        >{{DataSrv.list[index].RAM}} RAM
+      </ion-row>
+      <ion-row class="ion-margin ion-justify-content-between" slot="content">
+        <span style="color: var(--ion-color-primary)">Screen Size: </span
+        >{{DataSrv.list[index].Screen}} inch
+      </ion-row>
+      <ion-button routerLink="/brands" routerDirection="back" expand="block"
+        >Close
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

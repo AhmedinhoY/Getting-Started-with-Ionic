@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Budget Planner </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> New Expense </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input
+          label="Expense Reason"
+          placeholder="Enter expense reason here"
+          type="text"
+          labelPlacement="stacked"
+          clearInput="true"
+          [(ngModel)]="xReason"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          label="Expense Amount"
+          placeholder="Enter expense amount here"
+          type="number"
+          labelPlacement="stacked"
+          clearInput="true"
+          [(ngModel)]="xAmount"
+        ></ion-input>
+      </ion-item>
+
+      <div class="ion-margin-vertical ion-text-center">
+        <ion-button (click)="addExpense()"
+          >Add Expense <ion-icon slot="end" name="add-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header
+      ><ion-card-title>Expenses List </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let x of list">
+        {{ x.reason}}: {{x.amount }} BD
+        <ion-button slot="end" (click)="deleteExpense()"
+          >Delete <ion-icon slot="end" name="close-outline"></ion-icon
+        ></ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

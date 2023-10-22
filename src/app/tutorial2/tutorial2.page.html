@@ -1,0 +1,183 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Laptops </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-segment [(ngModel)]="selectedSegment">
+    <ion-segment-button value="new">
+      <ion-label>New</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="list">
+      <ion-label>List</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="selectedSegment">
+    <ion-list *ngSwitchCase="'new'">
+      <ion-item>
+        <ion-input
+          label="Brand Name"
+          placeholder="Enter Laptop Brand"
+          [clearInput]="true"
+          [(ngModel)]="lbrand"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-select label="CPU" [(ngModel)]="CPU">
+          <ion-select-option value="intel-i7">Intel-i7</ion-select-option>
+          <ion-select-option value="intel-i5">Intel-i5</ion-select-option>
+          <ion-select-option value="intel-i3">Intel-i3</ion-select-option>
+          <ion-select-option value="AMD">AMD</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-select label="GPU" [(ngModel)]="GPU">
+          <ion-select-option value="Apple M2 Pro"
+            >Apple M2 Pro</ion-select-option
+          >
+          <ion-select-option value="Intel Iris">Intel Iris</ion-select-option>
+          <ion-select-option value="AMD Radeon">AMD Radeon</ion-select-option>
+          <ion-select-option value="NVidia GeForce"
+            >NVidia GeForce</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-range
+          label="RAM"
+          [(ngModel)]="RAM"
+          [ticks]="true"
+          [snaps]="true"
+          [pin]="true"
+          [min]="0"
+          [max]="16"
+          step="1"
+          ><ion-text slot="start">{{RAM}}</ion-text>
+        </ion-range>
+      </ion-item>
+
+      <ion-item>
+        <ion-range
+          [(ngModel)]="Weight"
+          label="Weight"
+          [ticks]="true"
+          [snaps]="true"
+          [pin]="true"
+          [min]="0"
+          [max]="3"
+          step="0.5"
+        >
+          <ion-text slot="start">{{Weight}}</ion-text>
+        </ion-range>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Screen Size</ion-label>
+        <ion-radio-group value="screenSize" [(ngModel)]="Screen">
+          <ion-radio value="12">12 inch</ion-radio><br />
+          <ion-radio value="13">13 inch</ion-radio><br />
+          <ion-radio value="14">14 inch</ion-radio><br />
+          <ion-radio value="15">15 inch</ion-radio>
+        </ion-radio-group>
+      </ion-item>
+
+      <ion-item>
+        <ion-toggle [(ngModel)]="Storage">Is HD SDD?</ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-checkbox [(ngModel)]="OS">Is Windows Installed?</ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-datetime presentation="date" [(ngModel)]="ManuDate">
+          <span slot="title">Manufacturing Date</span>
+        </ion-datetime>
+      </ion-item>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-button class="ion-margin" (click)="Add()" id="addLaptop"
+          >Add Laptop</ion-button
+        >
+        <ion-alert
+          trigger="addLaptop"
+          header="Add Confirmation"
+          message="New Laptop Record Added."
+          [buttons]="alertButtons"
+        ></ion-alert>
+      </ion-row>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'list'">
+      <ion-accordion-group *ngFor="let x of product" class="ion-margin">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-accordion value="{{x.lbrand}}">
+              <ion-item slot="header">
+                <ion-label>{{x.lbrand}}</ion-label>
+              </ion-item>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)">CPU: </span
+                >{{x.CPU}}
+              </div>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)">GPU: </span
+                >{{x.GPU}}
+              </div>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)">RAM: </span
+                >{{x.RAM}}
+              </div>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)">Weight: </span
+                >{{x.Weight}}
+              </div>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)">Screen: </span
+                >{{x.Screen}}
+              </div>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)">Storage: </span
+                >{{x.Storage}}
+              </div>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)"
+                  >Operating System: </span
+                >{{x.OS}}
+              </div>
+
+              <div class="ion-padding-horizontal ion-margin" slot="content">
+                <span style="color: var(ion-color-primary)"
+                  >Manufacturing Date: </span
+                >{{x.ManuDate}}
+              </div>
+            </ion-accordion>
+          </ion-item>
+
+          <ion-item-options>
+            <ion-item-option>
+              <ion-button (click)="deleteRecord()" color="light" fill="clear"
+                >Delete</ion-button
+              >
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-accordion-group>
+    </ion-list>
+  </div>
+</ion-content>

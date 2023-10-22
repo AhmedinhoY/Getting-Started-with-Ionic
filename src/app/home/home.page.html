@@ -1,20 +1,28 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Exercises </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-list>
+    <ion-item>
+      Budget Planner
+      <ion-button routerLink="/budget-planner" slot="end">
+        Go to page
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      Tutorial 1
+      <ion-button routerLink="/tutorial1" slot="end"> Go to page </ion-button>
+    </ion-item>
+    <ion-item>
+      Tutorial 2
+      <ion-button routerLink="/tutorial2" slot="end"> Go to page</ion-button>
+    </ion-item>
+    <ion-item>
+      Tutorial 3
+      <ion-button routerLink="/tutorial3" slot="end"> Go to page</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

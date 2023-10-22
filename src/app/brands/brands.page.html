@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Brands </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let x of DataSrv.list; let i=index">
+    <ion-card-header>
+      <ion-row  class="ion-justify-content-between">
+        <ion-card-title> {{x.Brand}} </ion-card-title>
+        <ion-avatar slot=>
+          <img alt="{{x.Brand}}" src="{{x.Image}}" />
+        </ion-avatar>
+      </ion-row>
+  
+    </ion-card-header>
+    <ion-card-content>
+      <div
+        class="ion-padding-horizontal ion-margin"
+        style="color: var(--ion-color-secondary)"
+        slot="content"
+      >
+        <span style="color: var(--ion-color-primary)"><h2>CPU:</h2> </span
+        >{{x.CPU}}
+      </div>
+      <div
+        class="ion-padding-horizontal ion-margin"
+        style="color: var(--ion-color-secondary)"
+        slot="content"
+      >
+        <span style="color: var(--ion-color-primary)"><h2>RAM:</h2> </span
+        >{{x.RAM}}
+      </div>
+      <ion-button routerLink="/details/{{i}}" expand="block"> View details</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
