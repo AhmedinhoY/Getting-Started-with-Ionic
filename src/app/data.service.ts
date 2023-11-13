@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage-angular';
+import { map } from 'rxjs/operators';
 
+//tutorial 2,3 -----------------------------------------------------------
 export interface laptop {
   Brand: String;
   CPU: String;
@@ -13,50 +17,34 @@ export interface laptop {
   ManuDate: Date;
 }
 
+//----------------------------------------------------------------
+
+export interface item {
+  name: string;
+  nav: item[];
+  cpu?: string;
+  ram?: string;
+  storage?: string;
+  screen?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor() {}
+  list: laptop[] = [];
+  itemsList: item[] = [];
 
-  list: laptop[] = [
-    {
-      Brand: 'Dell',
-      CPU: 'Intel i-7',
-      GPU: 'Intel Iris',
-      RAM: Number(8),
-      Weight: Number(1.5),
-      Screen: Number(13),
-      Storage: true,
-      OS: true,
-      Image: './assets/dell.jpeg',
-      ManuDate: new Date(),
-    },
-    {
-      Brand: 'Macbook Air',
-      CPU: 'Intel i-7',
-      GPU: 'Intel Iris',
-      RAM: Number(8),
-      Weight: Number(1),
-      Screen: Number(15),
-      Storage: true,
-      OS: false,
-      Image: './assets/macbook air.jpeg',
-      ManuDate: new Date(),
-    },
-    {
-      Brand: 'MacBook Pro',
-      CPU: 'Intel i-7',
-      GPU: 'Intel Iris',
-      RAM: Number(8),
-      Weight: Number(1),
-      Screen: Number(15),
-      Storage: true,
-      OS: false,
-      Image: './assets/macbook pro.jpeg',
-      ManuDate: new Date(),
-    },
-  ];
+  constructor(private http: HttpClient, public storage: Storage) {}
+
+  loadJsonData() {
+    return this.http.get('assets/data.json').pipe(
+      map((data: any) => {
+        this.itemsList = data;
+        return data;
+      })
+    );
+  }
 
   getListLength(): number {
     return this.list.length;

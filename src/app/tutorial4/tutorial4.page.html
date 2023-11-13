@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Tutorial 4 Home Page </ion-title>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Category</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-accordion-group>
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>Computers</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-item
+              [routerLink]="['/tut4-details/',0, 0]"
+              routerDirection="forward"
+            >
+              Laptops
+            </ion-item>
+            <ion-item
+              [routerLink]="['/tut4-details/',0, 1]"
+              routerDirection="forward"
+            >
+              Tablets
+            </ion-item>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>Electronics</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-item
+              [routerLink]="['/tut4-details/', 1, 0]"
+              routerDirection="forward"
+              >Mobile Devices</ion-item
+            >
+            <ion-item
+              [routerLink]="['/tut4-details/', 1, 1]"
+              routerDirection="forward"
+              >Televisions</ion-item
+            >
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row class="ion-justify-content-center">
+      <ion-button style="width: 20%" (click)="saveLocal()">Save</ion-button>
+      <ion-button style="width: 20%" (click)="showAlert()">Get</ion-button>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

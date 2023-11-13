@@ -49,6 +49,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./settings/settings.module').then((m) => m.SettingsPageModule),
   },
+  {
+    path: 'tutorial4',
+    loadChildren: () =>
+      import('./tutorial4/tutorial4.module').then((m) => m.Tutorial4PageModule),
+  },
+  {
+    path: 'tut4-details/:category/:item',
+    loadChildren: () =>
+      import('./tut4-details/tut4-details.module').then(
+        (m) => m.Tut4DetailsPageModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Tutorial 4 Details Page </ion-title>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card *ngIf="items && searchedItems">
+    <ion-card-header>
+      <ion-card-title> {{ searchedItems.name }} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group *ngFor="let x of searchedItems.nav; let i = index">
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>{{x.name}}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-grid class="ion-text-center">
+              <ion-row>
+                <ion-col>CPU</ion-col>
+                <ion-col>RAM</ion-col>
+                <ion-col>Storage</ion-col>
+                <ion-col>Screen</ion-col>
+                <!-- <ion-button
+                  *ngIf="addButton"
+                  size="small"
+                  color="danger"
+                  (click)="addRecords()"
+                >
+                  Add
+                </ion-button> -->
+              </ion-row>
+              <ion-row
+                *ngIf=" addDeviceButton "
+                class="ion-justify-content-center"
+              >
+                <ion-row class="ion-text-center">
+                  <ion-col
+                    ><ion-item>
+                      <ion-input
+                        placeholder="CPU"
+                        [(ngModel)]="CPU"
+                      ></ion-input></ion-item
+                  ></ion-col>
+                  <ion-col
+                    ><ion-item>
+                      <ion-input
+                        placeholder="RAM"
+                        [(ngModel)]="RAM"
+                      ></ion-input></ion-item
+                  ></ion-col>
+                  <ion-col
+                    ><ion-item>
+                      <ion-input
+                        placeholder="Storage"
+                        [(ngModel)]="Storage"
+                      ></ion-input></ion-item
+                  ></ion-col>
+                  <ion-col
+                    ><ion-item>
+                      <ion-input
+                        placeholder="Screen"
+                        [(ngModel)]="Screen"
+                      ></ion-input></ion-item
+                  ></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-button
+                    size="small"
+                    color="danger"
+                    (click)="addNewDevice(i)"
+                  >
+                    Add New Device
+                  </ion-button>
+                </ion-row>
+              </ion-row>
+              <ion-row *ngFor="let item of x.nav">
+                <ion-col>
+                  <ion-label style="color: black">
+                    {{ item.cpu }}
+                  </ion-label></ion-col
+                >
+                <ion-col>
+                  <ion-label style="color: black">
+                    {{ item.ram}}
+                  </ion-label></ion-col
+                >
+                <ion-col>
+                  <ion-label style="color: black">
+                    {{ item.storage}}
+                  </ion-label></ion-col
+                >
+                <ion-col>
+                  <ion-label style="color: black">
+                    {{ item.screen}}
+                  </ion-label></ion-col
+                >
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+      <ion-row class="ion-justify-content-center">
+        <ion-button (click)="editRecords()"> Edit </ion-button>
+        <ion-button *ngIf=" editTrigger " (click)="saveRecords()">
+          Save
+        </ion-button>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
