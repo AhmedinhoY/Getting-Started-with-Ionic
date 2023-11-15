@@ -13,8 +13,8 @@ import { Tut4DetailsPage } from './tut4-details.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    Tut4DetailsPageRoutingModule
+    Tut4DetailsPageRoutingModule,
   ],
-  declarations: [Tut4DetailsPage]
+  declarations: [Tut4DetailsPage],
 })
 export class Tut4DetailsPageModule {}

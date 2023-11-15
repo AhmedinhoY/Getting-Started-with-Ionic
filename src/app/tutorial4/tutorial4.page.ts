@@ -50,8 +50,14 @@ export class Tutorial4Page implements OnInit {
     await alert.present();
   }
 
-  getDataFromStorage() {}
-  getDataFromFile() {}
-  saveLocal() {}
+  getDataFromStorage() {
+    this.DataServ.getDataFromFileButton = false;
+    this.DataServ.getDataFromStorageButton = true;
+  }
+  getDataFromFile() {
+    this.DataServ.getDataFromFileButton = true;
+    this.DataServ.getDataFromStorageButton = false;
+  }
+
   //----------------------------------------------------------------
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Storage } from '@ionic/storage-angular';
 import { map } from 'rxjs/operators';
+import { Storage } from '@ionic/storage-angular';
 
 //tutorial 2,3 -----------------------------------------------------------
 export interface laptop {
@@ -34,6 +34,9 @@ export interface item {
 export class DataService {
   list: laptop[] = [];
   itemsList: item[] = [];
+
+  getDataFromFileButton: boolean = false;
+  getDataFromStorageButton: boolean = true;
 
   constructor(private http: HttpClient, public storage: Storage) {}
 
