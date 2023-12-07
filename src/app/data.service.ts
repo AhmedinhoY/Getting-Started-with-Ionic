@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Storage } from '@ionic/storage-angular';
 
-//tutorial 2,3 -----------------------------------------------------------
+//-------------------------tutorial 3---------------------------------------
 export interface laptop {
   Brand: String;
   CPU: String;
@@ -17,7 +17,7 @@ export interface laptop {
   ManuDate: Date;
 }
 
-//----------------------------------------------------------------
+//-------------------------tutorial 4---------------------------------------
 
 export interface item {
   name: string;
@@ -32,6 +32,12 @@ export interface item {
   providedIn: 'root',
 })
 export class DataService {
+  //-------------------------tutorial 2---------------------------------------
+
+  getListLength(): number {
+    return this.list.length;
+  }
+  //---------------------tutorial 4------------------------------------------------
   list: laptop[] = [];
   itemsList: item[] = [];
 
@@ -40,6 +46,8 @@ export class DataService {
 
   constructor(private http: HttpClient, public storage: Storage) {}
 
+  //--------------------------tutorial 4--------------------------------------
+
   loadJsonData() {
     return this.http.get('assets/data.json').pipe(
       map((data: any) => {
@@ -47,9 +55,5 @@ export class DataService {
         return data;
       })
     );
-  }
-
-  getListLength(): number {
-    return this.list.length;
   }
 }

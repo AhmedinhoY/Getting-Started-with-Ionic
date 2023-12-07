@@ -1,0 +1,148 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Activities</ion-title>
+    <ion-buttons>
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Register Activity</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input
+          label="Title"
+          placeholder="Enter Activity Title"
+          labelPlacement="stacked"
+          [(ngModel)]="newActivity.title"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          label="Date"
+          placeholder="Enter Activity Date"
+          labelPlacement="stacked"
+          type="Date"
+          [(ngModel)]="newActivity.date"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item
+        ><ion-input
+          label="Duration"
+          placeholder="Enter Activity Duration (hrs)"
+          type="number"
+          labelPlacement="stacked"
+          [(ngModel)]="newActivity.duration"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item
+        ><ion-input
+          label="Venue"
+          placeholder="Enter Activity Venue"
+          labelPlacement="stacked"
+          [(ngModel)]="newActivity.venue"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          label="Enter Number of Participants"
+          placeholder="Enter your Phone Number"
+          labelPlacement="stacked"
+          type="number"
+          [(ngModel)]="newActivity.numberOfParts"
+        ></ion-input
+      ></ion-item>
+
+      <ion-item>
+        <ion-select
+          label="Topic"
+          labelPlacement="stacked"
+          placeholder="Select Activity Topic"
+          [(ngModel)]="newActivity.topic"
+        >
+          <ion-select-option value="cultural">Cultural</ion-select-option>
+          <ion-select-option value="scientific">Scientific</ion-select-option>
+          <ion-select-option value="competition">Competition</ion-select-option>
+          <ion-select-option value="organaization"
+            >Organization</ion-select-option
+          >
+          <ion-select-option value="general">General</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" class="ion-margin" (click)="AddActivity()"
+        >Submit</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Activities List</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-accordion *ngFor="let a of fb.activities$ | async">
+            <ion-item slot="header" color="light">
+              <ion-label>{{a.title}}</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-label>
+                <ion-input
+                  label="Title"
+                  value="{{a.title}}"
+                  [(ngModel)]="a.title"
+                ></ion-input>
+                <ion-input
+                  label="Date"
+                  value="{{a.date}}"
+                  [(ngModel)]="a.date"
+                ></ion-input>
+                <ion-input
+                  label="Duration"
+                  value="{{a.duration}}"
+                  [(ngModel)]="a.duration"
+                ></ion-input>
+                <ion-input
+                  label="Venue"
+                  value="{{a.venue}}"
+                  [(ngModel)]="a.venue"
+                ></ion-input>
+                <ion-input
+                  label="Number of Participants"
+                  value="{{a.numberOfParts}}"
+                  [(ngModel)]="a.numberOfParts"
+                ></ion-input>
+                <ion-input
+                  label="Topic"
+                  value="{{a.topic}}"
+                  [(ngModel)]="a.topic"
+                ></ion-input>
+
+                <ion-button slot="end" (click)="UpdateActivity(a)"
+                  >Update</ion-button
+                >
+
+                <ion-button
+                  slot="end"
+                  color="danger"
+                  (click)="DeleteActivity(a)"
+                  >Delete</ion-button
+                >
+              </ion-label>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

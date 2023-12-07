@@ -33,16 +33,20 @@ export class Tut4DetailsPage implements OnInit {
   async ngOnInit() {
     await this.DataServ.storage.create();
 
+    //getting the passed indexes
     this.itemName = this.route.snapshot.paramMap.get('item');
     this.categoryName = this.route.snapshot.paramMap.get('category');
-
     console.log('The selected item is', this.categoryName, this.itemName);
 
+    //getting the data
     if (this.DataServ.getDataFromStorageButton) {
       this.DataServ.storage.get('SearchedItemsLocalList').then((response) => {
+        //get from storage
         if (response) {
+          // there is result --> take it from the storage
           this.searchedItems = response;
         } else {
+          // no records found in the storage take it from json file
           this.DataServ.loadJsonData().subscribe((data) => {
             this.items = data; // loading jsonFile into the array items
             console.log('Data loaded:', this.items);

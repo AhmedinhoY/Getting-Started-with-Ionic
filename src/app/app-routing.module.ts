@@ -61,6 +61,23 @@ const routes: Routes = [
         (m) => m.Tut4DetailsPageModule
       ),
   },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginPageModule),
+  },
+  {
+    path: 'members',
+    loadChildren: () => import('./members/members.module').then( m => m.MembersPageModule)
+  },
+  {
+    path: 'activity',
+    loadChildren: () => import('./activity/activity.module').then( m => m.ActivityPageModule)
+  },
+  {
+    path: 'tutorial5',
+    loadChildren: () => import('./tutorial5/tutorial5.module').then( m => m.Tutorial5PageModule)
+  },
 ];
 
 @NgModule({
