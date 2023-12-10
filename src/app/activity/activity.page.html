@@ -13,74 +13,78 @@
       <ion-card-title>Register Activity</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-input
-          label="Title"
-          placeholder="Enter Activity Title"
-          labelPlacement="stacked"
-          [(ngModel)]="newActivity.title"
-        ></ion-input>
-      </ion-item>
+      <form [formGroup]="activityForm" (ngSubmit)="AddActivity()">
+        <ion-item>
+          <ion-input
+            label="Title"
+            placeholder="Enter Activity Title"
+            labelPlacement="stacked"
+            formControlName="title"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-input
-          label="Date"
-          placeholder="Enter Activity Date"
-          labelPlacement="stacked"
-          type="Date"
-          [(ngModel)]="newActivity.date"
-        ></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input
+            label="Date"
+            placeholder="Enter Activity Date"
+            labelPlacement="stacked"
+            type="Date"
+            formControlName="date"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item
-        ><ion-input
-          label="Duration"
-          placeholder="Enter Activity Duration (hrs)"
-          type="number"
-          labelPlacement="stacked"
-          [(ngModel)]="newActivity.duration"
-        ></ion-input>
-      </ion-item>
+        <ion-item
+          ><ion-input
+            label="Duration"
+            placeholder="Enter Activity Duration (hrs)"
+            type="number"
+            labelPlacement="stacked"
+            formControlName="duration"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item
-        ><ion-input
-          label="Venue"
-          placeholder="Enter Activity Venue"
-          labelPlacement="stacked"
-          [(ngModel)]="newActivity.venue"
-        ></ion-input>
-      </ion-item>
+        <ion-item
+          ><ion-input
+            label="Venue"
+            placeholder="Enter Activity Venue"
+            labelPlacement="stacked"
+            formControlName="venue"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-input
-          label="Enter Number of Participants"
-          placeholder="Enter your Phone Number"
-          labelPlacement="stacked"
-          type="number"
-          [(ngModel)]="newActivity.numberOfParts"
-        ></ion-input
-      ></ion-item>
+        <ion-item>
+          <ion-input
+            label="Enter Number of Participants"
+            placeholder="Enter your Phone Number"
+            labelPlacement="stacked"
+            type="number"
+            formControlName="numberOfParts"
+          ></ion-input
+        ></ion-item>
 
-      <ion-item>
-        <ion-select
-          label="Topic"
-          labelPlacement="stacked"
-          placeholder="Select Activity Topic"
-          [(ngModel)]="newActivity.topic"
-        >
-          <ion-select-option value="cultural">Cultural</ion-select-option>
-          <ion-select-option value="scientific">Scientific</ion-select-option>
-          <ion-select-option value="competition">Competition</ion-select-option>
-          <ion-select-option value="organaization"
-            >Organization</ion-select-option
+        <ion-item>
+          <ion-select
+            label="Topic"
+            labelPlacement="stacked"
+            placeholder="Select Activity Topic"
+            formControlName="topic"
           >
-          <ion-select-option value="general">General</ion-select-option>
-        </ion-select>
-      </ion-item>
+            <ion-select-option value="cultural">Cultural</ion-select-option>
+            <ion-select-option value="scientific">Scientific</ion-select-option>
+            <ion-select-option value="competition"
+              >Competition</ion-select-option
+            >
+            <ion-select-option value="organaization"
+              >Organization</ion-select-option
+            >
+            <ion-select-option value="general">General</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-      <ion-button expand="block" class="ion-margin" (click)="AddActivity()"
-        >Submit</ion-button
-      >
+        <ion-button expand="block" class="ion-margin" type="submit"
+          >Submit</ion-button
+        >
+      </form>
     </ion-card-content>
   </ion-card>
 

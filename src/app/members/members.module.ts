@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { MembersPageRoutingModule } from './members-routing.module';
@@ -13,8 +13,9 @@ import { MembersPage } from './members.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MembersPageRoutingModule
+    MembersPageRoutingModule,
+    ReactiveFormsModule,
   ],
-  declarations: [MembersPage]
+  declarations: [MembersPage],
 })
 export class MembersPageModule {}

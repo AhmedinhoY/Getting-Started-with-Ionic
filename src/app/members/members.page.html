@@ -13,104 +13,106 @@
       <ion-card-title>Register Member</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-input
-          label="Student ID"
-          placeholder="Enter your Student ID"
-          labelPlacement="stacked"
-          type="number"
-          [(ngModel)]="newMember.studentID"
-        ></ion-input>
-      </ion-item>
+      <form [formGroup]="membersForm" (ngSubmit)="AddMember()">
+        <ion-item>
+          <ion-input
+            label="Student ID"
+            placeholder="Enter your Student ID"
+            labelPlacement="stacked"
+            formControlName="studentID"
+            type="number"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-input
-          label="First Name"
-          placeholder="Enter your First Name"
-          labelPlacement="stacked"
-          [(ngModel)]="newMember.firstName"
-        ></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input
+            label="First Name"
+            placeholder="Enter your First Name"
+            labelPlacement="stacked"
+            formControlName="firstName"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item
-        ><ion-input
-          label="Last Name"
-          placeholder="Enter your Last Name"
-          labelPlacement="stacked"
-          [(ngModel)]="newMember.lastName"
-        ></ion-input>
-      </ion-item>
+        <ion-item
+          ><ion-input
+            label="Last Name"
+            placeholder="Enter your Last Name"
+            labelPlacement="stacked"
+            formControlName="lastName"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item
-        ><ion-input
-          label="Age"
-          placeholder="Enter your Age"
-          labelPlacement="stacked"
-          type="number"
-          [(ngModel)]="newMember.age"
-        ></ion-input>
-      </ion-item>
+        <ion-item
+          ><ion-input
+            label="Age"
+            placeholder="Enter your Age"
+            labelPlacement="stacked"
+            type="number"
+            formControlName="age"
+          ></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-select
-          label="Gender"
-          labelPlacement="stacked"
-          placeholder="Select your gender"
-          [(ngModel)]="newMember.gender"
+        <ion-item>
+          <ion-select
+            label="Gender"
+            labelPlacement="stacked"
+            placeholder="Select your gender"
+            formControlName="gender"
+          >
+            <ion-select-option value="Male">Male</ion-select-option>
+            <ion-select-option value="Female">Female</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item
+          ><ion-select
+            label="Major"
+            placeholder="Enter your Major"
+            labelPlacement="stacked"
+            formControlName="major"
+          >
+            <ion-select-option value="Computer Science"
+              >Computer Science</ion-select-option
+            >
+            <ion-select-option value="Computer Engineering"
+              >Computer Engineering</ion-select-option
+            >
+            <ion-select-option value="Information System"
+              >Information System</ion-select-option
+            >
+            <ion-select-option value="Software Engineering"
+              >Software Engineering</ion-select-option
+            >
+            <ion-select-option value="Cyber Security"
+              >Cyber Security</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+
+        <ion-item
+          ><ion-input
+            label="Email"
+            placeholder="Enter your Email"
+            labelPlacement="stacked"
+            type="email"
+            formControlName="email"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="Phone Number"
+            placeholder="Enter your Phone Number"
+            labelPlacement="stacked"
+            type="tel"
+            formControlName="phoneNumber"
+          ></ion-input
+        ></ion-item>
+
+        <ion-button expand="block" class="ion-margin" type="submit"
+          >Submit</ion-button
         >
-          <ion-select-option value="Male">Male</ion-select-option>
-          <ion-select-option value="Female">Female</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item
-        ><ion-select
-          label="Major"
-          placeholder="Enter your Major"
-          labelPlacement="stacked"
-          [(ngModel)]="newMember.major"
-        >
-          <ion-select-option value="Computer Science"
-            >Computer Science</ion-select-option
-          >
-          <ion-select-option value="Computer Engineering"
-            >Computer Engineering</ion-select-option
-          >
-          <ion-select-option value="Information System"
-            >Information System</ion-select-option
-          >
-          <ion-select-option value="Software Engineering"
-            >Software Engineering</ion-select-option
-          >
-          <ion-select-option value="Cyber Security"
-            >Cyber Security</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-
-      <ion-item
-        ><ion-input
-          label="Email"
-          placeholder="Enter your Email"
-          labelPlacement="stacked"
-          type="email"
-          [(ngModel)]="newMember.email"
-        ></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input
-          label="Phone Number"
-          placeholder="Enter your Phone Number"
-          labelPlacement="stacked"
-          type="tel"
-          [(ngModel)]="newMember.phoneNumber"
-        ></ion-input
-      ></ion-item>
-
-      <ion-button expand="block" class="ion-margin" (click)="AddMember()"
-        >Submit</ion-button
-      >
+      </form>
     </ion-card-content>
   </ion-card>
 
