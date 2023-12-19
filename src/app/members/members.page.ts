@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Member, FBServiceService } from '../fbservice.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-members',
@@ -40,6 +45,14 @@ export class MembersPage implements OnInit {
           Validators.pattern(/^(33|34|36|37|38|66|39)\d{6}$/),
         ]),
       ],
+      password: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(8)]),
+      ],
+      confirmPassword: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(8)]),
+      ],
     });
   }
 
@@ -47,17 +60,26 @@ export class MembersPage implements OnInit {
 
   AddMember() {
     if (this.membersForm.valid) {
-      this.newMember = this.membersForm.value;
+      const { password, confirmPassword, ...memberInfo } =
+        this.membersForm.value;
       this.fb
-        .addMember(this.newMember)
+        .addMember(memberInfo)
         .then((res) => {
-          alert('Added Successfully');
+          alert('Member Added Successfully');
         })
         .catch((err) => {
-          console.log('Error in adding');
+          console.log('Adding Member Failed');
         });
     } else {
       alert('There are missing/wrong fields, Every field is required!!');
+    }
+  }
+
+  RegisterUser() {
+    if (this.membersForm.valid) {
+      const email = this.membersForm.get('email')?.value;
+      const password = this.membersForm.get('password')?.value;
+      return this.fb.RegisterUser(email, password);
     }
   }
 

@@ -1,19 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Members Registeration</ion-title>
+    <ion-button size="small" slot="end" routerLink="/activity"
+      >Go to Activity Page</ion-button
+    >
+    <ion-title>Members</ion-title>
     <ion-buttons>
       <ion-back-button> </ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content class="ion-padding">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Register Member</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="membersForm" (ngSubmit)="AddMember()">
+      <form [formGroup]="membersForm" (ngSubmit)="AddMember(); RegisterUser()">
         <ion-item>
           <ion-input
             label="Student ID"
@@ -23,6 +26,13 @@
             type="number"
           ></ion-input>
         </ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['studentID'].hasError('required')&&
+          membersForm.controls['studentID'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
 
         <ion-item>
           <ion-input
@@ -32,6 +42,21 @@
             formControlName="firstName"
           ></ion-input>
         </ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['firstName'].hasError('required') && 
+          membersForm.controls['firstName'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+        <ion-item
+          lines="none"
+          *ngIf="
+          membersForm.controls['firstName'].hasError('maxLength') &&
+          membersForm.controls['firstName'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
 
         <ion-item
           ><ion-input
@@ -41,6 +66,69 @@
             formControlName="lastName"
           ></ion-input>
         </ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['lastName'].hasError('required') &&
+          membersForm.controls['lastName'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+        <ion-item
+          lines="none"
+          *ngIf="
+          membersForm.controls['lastName'].hasError('maxLength') &&
+          membersForm.controls['lastName'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+
+        <ion-item
+          ><ion-input
+            label="Email"
+            placeholder="Enter your Email"
+            labelPlacement="stacked"
+            type="email"
+            formControlName="email"
+          ></ion-input>
+        </ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['email'].hasError('required') &&
+          membersForm.controls['email'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['email'].hasError('pattern') && 
+          membersForm.controls['email'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+
+        <ion-item>
+          <ion-input
+            label="Phone Number"
+            placeholder="Enter your Phone Number"
+            labelPlacement="stacked"
+            type="tel"
+            formControlName="phoneNumber"
+          ></ion-input
+        ></ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['phoneNumber'].hasError('required') && 
+          membersForm.controls['phoneNumber'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['phoneNumber'].hasError('pattern') && 
+          membersForm.controls['phoneNumber'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
 
         <ion-item
           ><ion-input
@@ -51,6 +139,13 @@
             formControlName="age"
           ></ion-input>
         </ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['age'].hasError('required') &&
+          membersForm.controls['age'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
 
         <ion-item>
           <ion-select
@@ -63,6 +158,13 @@
             <ion-select-option value="Female">Female</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['gender'].hasError('required') &&
+          membersForm.controls['gender'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
 
         <ion-item
           ><ion-select
@@ -88,28 +190,69 @@
             >
           </ion-select>
         </ion-item>
-
         <ion-item
-          ><ion-input
-            label="Email"
-            placeholder="Enter your Email"
-            labelPlacement="stacked"
-            type="email"
-            formControlName="email"
-          ></ion-input>
-        </ion-item>
+          lines="none"
+          *ngIf="membersForm.controls['major'].hasError('required') &&
+          membersForm.controls['major'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
 
         <ion-item>
           <ion-input
-            label="Phone Number"
-            placeholder="Enter your Phone Number"
+            label="Password"
+            placeholder="Enter your Password"
             labelPlacement="stacked"
-            type="tel"
-            formControlName="phoneNumber"
+            type="Password"
+            formControlName="password"
           ></ion-input
         ></ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['password'].hasError('required') && 
+          membersForm.controls['password'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+        <ion-item
+          lines="none"
+          *ngIf="
+          membersForm.controls['password'].hasError('minLength') &&
+          membersForm.controls['password'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
 
-        <ion-button expand="block" class="ion-margin" type="submit"
+        <ion-item>
+          <ion-input
+            label="Confirm Password"
+            placeholder="Confirm your Password"
+            labelPlacement="stacked"
+            type="Password"
+            formControlName="confirmPassword"
+          ></ion-input
+        ></ion-item>
+        <ion-item
+          lines="none"
+          *ngIf="membersForm.controls['password'].hasError('required') && 
+          membersForm.controls['password'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+        <ion-item
+          lines="none"
+          *ngIf="
+          membersForm.controls['password'].hasError('minLength') &&
+          membersForm.controls['password'].touched"
+        >
+          <ion-text color="danger">**</ion-text></ion-item
+        >
+
+        <ion-button
+          expand="block"
+          class="ion-margin"
+          type="submit"
+          [disabled]="!membersForm.valid"
           >Submit</ion-button
         >
       </form>

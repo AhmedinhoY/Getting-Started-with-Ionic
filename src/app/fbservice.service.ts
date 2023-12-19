@@ -21,20 +21,29 @@ import {
   query,
 } from '@angular/fire/firestore';
 
+import {
+  Auth,
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  sendSignInLinkToEmail,
+} from '@angular/fire/auth';
+
 import { DocumentData } from 'firebase/firestore';
 
 import { Observable } from 'rxjs';
 
 //members interface
 export interface Member {
-  studentID?: string;
-  firstName?: string;
-  lastName?: string;
-  age?: number;
-  gender?: string;
-  major?: string;
-  phoneNumber?: number;
-  email?: string;
+  studentID: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  gender: string;
+  major: string;
+  phoneNumber: number;
+  email: string;
 }
 
 export interface Activity {
@@ -50,39 +59,32 @@ export interface Activity {
   providedIn: 'root',
 })
 export class FBServiceService {
-  // 2. Arrays of any
+  // members
   public members: any[] = [];
-  public activities: any[] = [];
-  // 3. Observable arrays
   public members$: Observable<Member[]>;
-  public activities$: Observable<Activity[]>;
-
-  // 4. Collection reference
   memberCollection: CollectionReference<DocumentData>;
+
+  // activity
+  public activities: any[] = [];
+  public activities$: Observable<Activity[]>;
   activityCollection: CollectionReference<DocumentData>;
 
-  constructor(public firestore: Firestore) {
+  constructor(public firestore: Firestore, public auth: Auth) {
     // get a reference to the members collection
     this.memberCollection = collection(this.firestore, 'Members');
-    this.activityCollection = collection(this.firestore, 'Activity');
-
     this.getMembers(); // get members as observable
-    this.getActivity(); // get members as observable
-
     this.getMembersCopy(); // get members by copy into array
-    this.getActivityCopy(); // get members by copy into array
+
+    this.activityCollection = collection(this.firestore, 'Activity');
+    this.getActivity();
+    this.getActivityCopy();
   }
 
+  // --------------------------Members Functions--------------------------------------
   async getMembers() {
     const q = query(collection(this.firestore, 'Members'));
     this.members$ = collectionData(q, { idField: 'id' }) as Observable<
       Member[]
-    >;
-  }
-  async getActivity() {
-    const q = query(collection(this.firestore, 'Activities'));
-    this.activities$ = collectionData(q, { idField: 'id' }) as Observable<
-      Activity[]
     >;
   }
 
@@ -93,22 +95,12 @@ export class FBServiceService {
       this.members.push(doc.data());
     });
   }
-  async getActivityCopy() {
-    const querySnapshot = await getDocs(
-      collection(this.firestore, 'Activities')
-    );
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots //console.log(doc.id, " => ", doc.data());
-      this.activities.push(doc.data());
-    });
-  }
+
   // Create Data in Firestore with Add()
   addMember(member): Promise<DocumentReference> {
     return addDoc(collection(this.firestore, 'Members'), member);
   }
-  addActivity(activity): Promise<DocumentReference> {
-    return addDoc(collection(this.firestore, 'Activities'), activity);
-  }
+
   // Create Member in Firestore with updateDoc()
   updateMember(member: Member): Promise<DocumentReference> {
     return setDoc(doc(this.firestore, 'Members', member.id), {
@@ -123,6 +115,34 @@ export class FBServiceService {
     });
     //when updating the member by update button, the data did't show in the list
   }
+
+  // Delete Document Data in Firestore with deleteDoc()
+  deleteMember(member: Member): Promise<void> {
+    return deleteDoc(doc(this.firestore, 'Members', member.id));
+  }
+
+  // -----------------------------Activity Functions-----------------------------------
+
+  async getActivity() {
+    const q = query(collection(this.firestore, 'Activities'));
+    this.activities$ = collectionData(q, { idField: 'id' }) as Observable<
+      Activity[]
+    >;
+  }
+  async getActivityCopy() {
+    const querySnapshot = await getDocs(
+      collection(this.firestore, 'Activities')
+    );
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots //console.log(doc.id, " => ", doc.data());
+      this.activities.push(doc.data());
+    });
+  }
+
+  addActivity(activity): Promise<DocumentReference> {
+    return addDoc(collection(this.firestore, 'Activities'), activity);
+  }
+
   updateActivity(activity: Activity): Promise<DocumentReference> {
     return setDoc(doc(this.firestore, 'Activities', activity.id), {
       Title: activity.title,
@@ -136,11 +156,43 @@ export class FBServiceService {
   }
 
   // Delete Document Data in Firestore with deleteDoc()
-  deleteMember(member: Member): Promise<void> {
-    return deleteDoc(doc(this.firestore, 'Members', member.id));
-  }
-  // Delete Document Data in Firestore with deleteDoc()
   deleteActivity(activity: Activity): Promise<void> {
     return deleteDoc(doc(this.firestore, 'Activities', activity.id));
+  }
+
+  // --------------------------Authorization Functions------------------------------------
+
+  RegisterUser(email, password) {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        alert(' User created successfully', user);
+      })
+      .catch((error) => {
+        alert(' Error creating user' + error.message);
+      });
+  }
+
+  login(email, password) {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert('You have been logged in successfuly');
+      })
+      .catch((error) => {
+        alert('Login failed');
+      });
+  }
+
+  logout() {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        alert('You have been logged out successfuly');
+      })
+      .catch((error) => {
+        alert('Logout failed');
+      });
   }
 }
