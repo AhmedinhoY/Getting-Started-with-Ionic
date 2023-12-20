@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button size="small" slot="end" routerLink="/sign-in"
+      >Sign in</ion-button
+    >
+    <ion-title>View Activities</ion-title>
+    <ion-button
+      color="primary"
+      size="small"
+      slot="start"
+      routerLink="/tutorial5"
+      fill="clear"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon> Home
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Activities</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row *ngFor="let a of fb.activities$ | async">
+        <ion-card>
+          <ion-card-content>
+            <ion-row>
+              <ion-label
+                style="font-weight: 600; font-size: 1.2rem"
+                color="primary"
+                >{{a.title}}</ion-label
+              >
+            </ion-row>
+
+            <ion-label style="font-weight: 500; margin-right: 5px"
+              >Topic:</ion-label
+            >
+            <ion-label>{{a.topic}}</ion-label> <br />
+            <ion-label style="font-weight: 500; margin-right: 5px"
+              >Date:</ion-label
+            >
+            <ion-label>{{a.date}}</ion-label> <br />
+            <ion-label style="font-weight: 500; margin-right: 5px"
+              >Duration:</ion-label
+            >
+            <ion-label>{{a.duration}}</ion-label> <br />
+            <ion-label style="font-weight: 500; margin-right: 5px"
+              >Venue:</ion-label
+            >
+            <ion-label>{{a.venue}}</ion-label> <br />
+            <ion-label style="font-weight: 500; margin-right: 5px"
+              >Number of Participants:
+            </ion-label>
+            <ion-label>{{a.numberOfParts}}</ion-label> <br />
+            <ion-button
+              size="small"
+              expand="block"
+              (click)="AddParticipant(a)"
+              [disabled]="!logged"
+              >Participate</ion-button
+            >
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

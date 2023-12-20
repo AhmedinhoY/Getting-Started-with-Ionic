@@ -28,6 +28,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   sendSignInLinkToEmail,
+  onAuthStateChanged,
 } from '@angular/fire/auth';
 
 import { DocumentData } from 'firebase/firestore';
@@ -55,6 +56,11 @@ export interface Activity {
   topic?: string;
 }
 
+export interface Participants {
+  ActivityID: string;
+  UserID: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -69,6 +75,11 @@ export class FBServiceService {
   public activities$: Observable<Activity[]>;
   activityCollection: CollectionReference<DocumentData>;
 
+  //participants
+  public participants: any[] = [];
+  public participants$: Observable<Participants[]>;
+  participantsCollection: CollectionReference<DocumentData>;
+
   constructor(public firestore: Firestore, public auth: Auth) {
     // get a reference to the members collection
     this.memberCollection = collection(this.firestore, 'Members');
@@ -78,6 +89,9 @@ export class FBServiceService {
     this.activityCollection = collection(this.firestore, 'Activity');
     this.getActivity();
     this.getActivityCopy();
+
+    this.getParticipantsCopy();
+    this.ParticipantsCollection = collection(this.firestore, 'Participants');
   }
 
   // --------------------------Members Functions--------------------------------------
@@ -94,11 +108,6 @@ export class FBServiceService {
       // doc.data() is never undefined for query doc snapshots //console.log(doc.id, " => ", doc.data());
       this.members.push(doc.data());
     });
-  }
-
-  // Create Data in Firestore with Add()
-  addMember(member): Promise<DocumentReference> {
-    return addDoc(collection(this.firestore, 'Members'), member);
   }
 
   // Create Member in Firestore with updateDoc()
@@ -162,11 +171,24 @@ export class FBServiceService {
 
   // --------------------------Authorization Functions------------------------------------
 
-  RegisterUser(email, password) {
+  memberDocRef = collection(this.firestore, 'Members');
+
+  RegisterUser(member, email, password) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        const userInfo: Member = {
+          StudentID: member.studentID,
+          FirstName: member.firstName,
+          LastName: member.lastName,
+          Age: member.age,
+          Major: member.major,
+          PhoneNumber: member.phoneNumber,
+          Gender: member.gender,
+          Email: member.email,
+        };
+        setDoc(doc(this.memberDocRef, user.uid), userInfo);
         alert(' User created successfully', user);
       })
       .catch((error) => {
@@ -194,5 +216,45 @@ export class FBServiceService {
       .catch((error) => {
         alert('Logout failed');
       });
+  }
+
+  // --------------------------View Activities Functions------------------------------------
+
+  async getParticipantsCopy() {
+    const querySnapshot = await getDocs(
+      collection(this.firestore, 'Participants')
+    );
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots //console.log(doc.id, " => ", doc.data());
+      this.participants.push(doc.data());
+    });
+  }
+
+  isParticipantExist(participantId: string, activityId: string): boolean {
+    return (
+      this.participants.find(
+        (participants) =>
+          participants.UserID === participantId &&
+          participants.ActivityID === activityId
+      ) !== undefined
+    );
+  }
+
+  participate(uid: string, activity: Activity): Promise<void> {
+    const participantDocRef = doc(
+      this.firestore,
+      'Participants',
+      `${activity.id}_${uid}`
+    );
+
+    if (this.isParticipantExist(uid, activity.id)) {
+      alert('You already have a ticket for this activity.');
+    } else {
+      setDoc(participantDocRef, {
+        ActivityID: activity.id,
+        UserID: uid,
+      });
+      alert('You have successfully booked a ticket for this activity.');
+    }
   }
 }

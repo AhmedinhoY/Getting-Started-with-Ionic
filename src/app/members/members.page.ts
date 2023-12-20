@@ -58,28 +58,13 @@ export class MembersPage implements OnInit {
 
   ngOnInit() {}
 
-  AddMember() {
+  RegisterUser() {
     if (this.membersForm.valid) {
       const { password, confirmPassword, ...memberInfo } =
         this.membersForm.value;
-      this.fb
-        .addMember(memberInfo)
-        .then((res) => {
-          alert('Member Added Successfully');
-        })
-        .catch((err) => {
-          console.log('Adding Member Failed');
-        });
-    } else {
-      alert('There are missing/wrong fields, Every field is required!!');
-    }
-  }
-
-  RegisterUser() {
-    if (this.membersForm.valid) {
       const email = this.membersForm.get('email')?.value;
-      const password = this.membersForm.get('password')?.value;
-      return this.fb.RegisterUser(email, password);
+      const userPassword = this.membersForm.get('password')?.value;
+      return this.fb.RegisterUser(memberInfo, email, userPassword);
     }
   }
 

@@ -4,19 +4,25 @@
       >Go to Activity Page</ion-button
     >
     <ion-title>Members</ion-title>
-    <ion-buttons>
-      <ion-back-button> </ion-back-button>
-    </ion-buttons>
+    <ion-button
+      color="primary"
+      size="small"
+      slot="start"
+      routerLink="/tutorial5"
+      fill="clear"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon> Home
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Register Member</ion-card-title>
+      <ion-card-title>Register</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="membersForm" (ngSubmit)="AddMember(); RegisterUser()">
+      <form [formGroup]="membersForm" (ngSubmit)="RegisterUser()">
         <ion-item>
           <ion-input
             label="Student ID"
@@ -256,6 +262,9 @@
           >Submit</ion-button
         >
       </form>
+      <ion-button expand="block" routerLink="/sign-in"
+        >You already a member? Sign In
+      </ion-button>
     </ion-card-content>
   </ion-card>
 

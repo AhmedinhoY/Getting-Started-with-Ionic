@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button size="small" slot="end" routerLink="/members"
+      >Go to Members Page</ion-button
+    >
+    <ion-title>Sign In</ion-title>
+    <ion-button
+      color="primary"
+      size="small"
+      slot="start"
+      routerLink="/tutorial5"
+      fill="clear"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon> Home
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Sign In</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+        <ion-item>
+          <ion-input
+            label="Email Address"
+            placeholder="Enter your Email Address"
+            labelPlacement="stacked"
+            formControlName="email"
+            type="string"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Password"
+            placeholder="Enter your Password"
+            labelPlacement="stacked"
+            formControlName="password"
+            type="password"
+          ></ion-input>
+        </ion-item>
+        <ion-button
+          type="submit"
+          expand="block"
+          [disabled]="!signInForm.valid"
+          class="ion-margin"
+          >Sign in</ion-button
+        >
+      </form>
+      <ion-button type="submit" expand="block" (click)="signOut()"
+        >Sign out</ion-button
+      >
+      <ion-button expand="block" routerLink="/members"
+        >You don't have account? Register</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+</ion-content>

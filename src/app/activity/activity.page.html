@@ -4,9 +4,15 @@
       >Go to Members Page</ion-button
     >
     <ion-title>Activities</ion-title>
-    <ion-buttons>
-      <ion-back-button> </ion-back-button>
-    </ion-buttons>
+    <ion-button
+      color="primary"
+      size="small"
+      slot="start"
+      routerLink="/tutorial5"
+      fill="clear"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon> Home
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -58,7 +64,7 @@
         <ion-item>
           <ion-input
             label="Enter Number of Participants"
-            placeholder="Enter your Phone Number"
+            placeholder="Enter Number of Participants"
             labelPlacement="stacked"
             type="number"
             formControlName="numberOfParts"

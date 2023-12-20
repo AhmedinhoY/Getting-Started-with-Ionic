@@ -18,7 +18,7 @@ export class ActivityPage implements OnInit {
         '',
         Validators.compose([Validators.required, Validators.maxLength(30)]),
       ],
-      date: ['', Validators.compose([Validators.required])],
+      date: ['', Validators.required],
       duration: [
         '',
         Validators.compose([
@@ -34,7 +34,7 @@ export class ActivityPage implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern('^[0-9]$'),
+          Validators.pattern('^[0-9]+$'),
         ]),
       ],
       topic: ['', Validators.required],

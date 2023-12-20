@@ -78,6 +78,14 @@ const routes: Routes = [
     path: 'tutorial5',
     loadChildren: () => import('./tutorial5/tutorial5.module').then( m => m.Tutorial5PageModule)
   },
+  {
+    path: 'sign-in',
+    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
+  },
+  {
+    path: 'view-activities',
+    loadChildren: () => import('./view-activities/view-activities.module').then( m => m.ViewActivitiesPageModule)
+  },
 ];
 
 @NgModule({
